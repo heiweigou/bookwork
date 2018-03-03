@@ -85,12 +85,13 @@ class ProductTable extends React.Component {
             }
             if (product.category !== lastCategory) {
                 rows.push(
-                    <ProductCategoryRow category={product.category}/>
+                    <ProductCategoryRow category={product.category} key={product.category}/>
                 )
             }
 
+
             rows.push(
-                <ProductRow product={product}/>
+                <ProductRow product={product} key={product.name}/>
             )
 
             lastCategory = product.category;

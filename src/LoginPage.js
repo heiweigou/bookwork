@@ -7,6 +7,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Isemail from 'isemail'
 import passwordValidator from 'password-validator'
 import Search from './Search'
+import ToDoList from './ToDoList'
 class LoginPage extends React.Component {
 
     constructor() {
@@ -112,7 +113,7 @@ class LoginPage extends React.Component {
 
                 </form>
                 <Search/>
-
+<ToDoList/>
             </div>
 
         )
