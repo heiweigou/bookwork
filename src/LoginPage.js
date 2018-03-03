@@ -6,6 +6,7 @@ import {BrowserRouter as Router, Route, Link} from 'react-router-dom'
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Isemail from 'isemail'
 import passwordValidator from 'password-validator'
+import Search from './Search'
 class LoginPage extends React.Component {
 
     constructor() {
@@ -16,7 +17,8 @@ class LoginPage extends React.Component {
                 email: '',
                 password: '',
             },
-            error: {},
+            error: {   email: ''
+                , password: []},
 
         }
     }
@@ -34,9 +36,7 @@ class LoginPage extends React.Component {
         e.preventDefault();
         const error = this.validator();
         //setState is ASYNCHRONOUS
-        this.setState({error: error},function () {
-            console.log(this.state.data,this.state.error)
-        })
+        this.setState({error: error})
 
     }
 
@@ -86,7 +86,7 @@ class LoginPage extends React.Component {
             <div className="container">
                 <h1>this is login page</h1>
                 <Link to="/">home</Link>
-                <form >
+                <form onSubmit={this.onSubmit}>
                     <div className="form-group">
                         <label>email</label>
                         <input name="email" type="email" onChange={this.onChange} value={this.state.data.email}
@@ -98,7 +98,7 @@ class LoginPage extends React.Component {
                     <div className="form-group">
                         <label>password</label>
                         <input type="password" value={this.state.data.password} onChange={this.onChange} name="password"
-                               className={!!this.state.error.password?'form-control is-invalid':'form-control is-valid'}/>
+                               className={this.state.error.password.length>0?'form-control is-invalid':'form-control is-valid'}/>
                         {
                             this.state.error.password&&this.state.error.password.map((item)=>{
                                 return (<span className="text-danger d-block">{item}</span>)
@@ -107,9 +107,11 @@ class LoginPage extends React.Component {
                         }
 
                     </div>
-                    <button className='btn btn-primary' onClick={this.onSubmit}>submit</button>
+                    <input type="submit" className={'btn btn-primary'} value='submit'/>
+
 
                 </form>
+                <Search/>
 
             </div>
 
